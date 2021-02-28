@@ -5,6 +5,7 @@ const solc = require("solc");
 const inboxPath = path.resolve(__dirname, "contracts", "Inbox.sol");
 const source = fs.readFileSync(inboxPath, "utf8");
 
+
 /***
  * The recommended way to interface with the Solidity compiler, especially for more
  * complex and automated setups is the so-called JSON-input-output interface.
@@ -13,21 +14,25 @@ const source = fs.readFileSync(inboxPath, "utf8");
  * for more details.
  */
 const input = {
-  language: "Solidity",
-  sources: {
-    "Inbox.sol": {
-      content: source
+    language: "Solidity",
+    sources: {
+        "Inbox.sol": {
+            content: source
+        }
+    },
+    settings: {
+        outputSelection: {
+            "*": {
+                "*": ["*"]
+            }
+        }
     }
-  },
-  settings: {
-    outputSelection: {
-      "*": {
-        "*": ["*"]
-      }
-    }
-  }
 };
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
+
+console.log(source)
+console.log(output)
+// console.log(solc.compile(source,1))//
 
 module.exports = output.contracts["Inbox.sol"].Inbox;

@@ -1,4 +1,6 @@
-pragma solidity >=0.5.0 <0.8.0;
+//SPDX-License-Identifier: UNLICENSED
+
+pragma solidity >=0.4.0 <0.8.0;
 
 contract Inbox {
     string public message;
